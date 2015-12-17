@@ -2,6 +2,7 @@ import * as api from '../api-client';
 
 export const API_STATUS_REQUESTED = 'API_STATUS_REQUESTED';
 export const API_STATUS_RECEIVED = 'API_STATUS_RECEIVED';
+export const DO_FOO = 'DO_FOO';
 
 export function requestApiStatus() {
   return {
@@ -22,3 +23,17 @@ export function checkApi() {
     api.fetchStatus(data => dispatch(respondWithApiStatus(data)));
   };
 }
+
+export function doFoo(payload) {
+  return {
+    type: DO_FOO,
+    data: payload,
+  };
+}
+
+export function doAsyncFoo() {
+  return dispatch => {
+    api.doFoo(data => dispatch(doFoo(data)));
+  };
+}
+

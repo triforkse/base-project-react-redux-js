@@ -22,3 +22,15 @@ export function connectWebSocket(cb) {
   socket.on('greeting', cb);
   socket.emit('greeting', 'hi from client');
 }
+
+export function doFoo(success) {
+  const base = config.apiAddress();
+  return http.post(`http://${base}/foo`, 'fafafa', (err, res) => {
+    if (err) throw new Error('Cannot perform the request: ' + err.status);
+    if (res.status === 200) {
+      console.log(res.data); // eslint-disable-line no-console
+    }
+
+    success(res.data);
+  });
+}

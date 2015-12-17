@@ -30,6 +30,11 @@ export default {
           res.send('Logged in!');
         });
 
+        app.post('/foo', (req, res) => {
+          console.log('req', req);
+          res.send('quux');
+        });
+
         // Enable HTTPS if certs are availible.
         const secure = (expressApp) => opts.certRoot ? https(expressApp, opts.certRoot) : expressApp;
 
